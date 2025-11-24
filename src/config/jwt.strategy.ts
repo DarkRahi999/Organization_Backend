@@ -8,17 +8,17 @@ const customExtractor = (req: any) => {
   let token: string | null = null;
   if (req && req.headers && req.headers.authorization) {
     const authHeader = req.headers.authorization;
-    
+
     // Handle double Bearer issue from Swagger
-    if (authHeader.startsWith('Bearer Bearer ')) {
+    if (authHeader.startsWith("Bearer Bearer ")) {
       // Extract token after "Bearer Bearer "
       token = authHeader.substring(14);
-    } 
+    }
     // Check if it's a single Bearer token
-    else if (authHeader.startsWith('Bearer ')) {
+    else if (authHeader.startsWith("Bearer ")) {
       token = authHeader.substring(7);
     }
-    
+
     // Clean the token of any extra characters
     if (token) {
       token = token.trim();
@@ -40,9 +40,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: any) {
     // Validate that the payload has the required fields
     if (!payload || !payload.sub || !payload.email) {
-      throw new UnauthorizedException('Invalid token payload');
+      throw new UnauthorizedException("Invalid token payload");
     }
-    
+
     // Return the user object that will be attached to the request
     return {
       userId: payload.sub,

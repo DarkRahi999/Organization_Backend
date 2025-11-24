@@ -1,4 +1,4 @@
-import { ClassConstructor, plainToInstance } from 'class-transformer';
+import { ClassConstructor, plainToInstance } from "class-transformer";
 
 declare function ItoResponse<T, V>(cls: ClassConstructor<T>, plain: V[]): T[];
 declare function ItoResponse<T, V>(cls: ClassConstructor<T>, plain: V): T;
