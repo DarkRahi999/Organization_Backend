@@ -1,36 +1,20 @@
 import { Controller, Post, Body, HttpCode, HttpStatus } from "@nestjs/common";
-import { CustomJwtService } from "../config/jwt/jwt.service";
-import { LoginDto } from "./dto/logIn.dto";
+import { ApiOperation, ApiResponse } from "@nestjs/swagger";
+import { LoginDto, LoginRes } from "./dto/logIn.dto";
+import { AuthService } from "./auth.service";
+import { Public } from "src/utils/decorator";
 
 @Controller("auth")
 export class AuthController {
-  constructor(private readonly jwtService: CustomJwtService) {}
+  constructor(private readonly authService: AuthService) {}
 
   @HttpCode(HttpStatus.OK)
+  @Public()
   @Post("login")
-  async login(@Body() loginDto: LoginDto) {
-    // Simple validation - in a real app, you'd check against a database
-    if (
-      loginDto.email === "admin@example.com" &&
-      loginDto.password === "admin123"
-    ) {
-      const payload = {
-        sub: 1,
-        email: loginDto.email,
-        role: "user",
-      };
-
-      const accessToken = await this.jwtService.generateToken(payload);
-
-      return {
-        accessToken,
-        user: {
-          id: 1,
-          email: loginDto.email,
-        },
-      };
-    }
-
-    return { error: "Invalid credentials" };
+  @ApiOperation({ summary: "User Login" })
+  @ApiResponse({ status: 200, description: "Login successful" })
+  @ApiResponse({ status: 401, description: "Invalid credentials" })
+  async login(@Body() data: LoginDto): Promise<LoginRes> {
+    return await this.authService.loginUser(data);
   }
 }

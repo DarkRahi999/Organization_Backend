@@ -8,7 +8,7 @@ import {
   IsOptional,
   IsString,
 } from "class-validator";
-import { BloodGroup, Gender, UserRole, UserStatus } from "src/utils/enums";
+import { BloodGroup, Gender, UserRole, UserStatus } from "src/utils/enum";
 
 export class CreateUserDto {
   @IsString()

@@ -6,3 +6,7 @@ declare function ItoResponse<T, V>(cls: ClassConstructor<T>, plain: V): T;
 export const toResponse: typeof ItoResponse = (Cls, data) => {
   return plainToInstance(Cls, data, { excludeExtraneousValues: true });
 };
+
+export function joinStrings(a?: string, b?: string, separator = " "): string {
+  return [a, b].filter(Boolean).join(separator);
+}

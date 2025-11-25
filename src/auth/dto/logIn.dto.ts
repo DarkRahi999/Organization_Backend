@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsString } from "class-validator";
+import { Expose } from "class-transformer";
 
 // DTOs for authentication
 export class LoginDto {
@@ -16,6 +17,20 @@ export class LoginDto {
     example: "password123",
   })
   password: string;
+}
+
+export class LoginRes {
+  @Expose()
+  id: number;
+
+  @Expose()
+  name: string;
+
+  @Expose()
+  email: string;
+
+  @Expose()
+  access_token: string;
 }
 
 export class RefreshTokenDto {

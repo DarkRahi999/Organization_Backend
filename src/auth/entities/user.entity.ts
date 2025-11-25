@@ -1,6 +1,6 @@
 import { Table } from "./base.entity";
 import { Entity, Enum, Property } from "@mikro-orm/core";
-import { BloodGroup, Gender, UserRole, UserStatus } from "../../utils/enums";
+import { BloodGroup, Gender, UserRole, UserStatus } from "../../utils/enum";
 
 @Entity()
 export class User extends Table {
@@ -18,7 +18,7 @@ export class User extends Table {
   email!: string;
 
   @Property({ length: 64 })
-  passHash!: string;
+  passwordHash!: string;
 
   //optional
   @Property({ length: 64, nullable: true })

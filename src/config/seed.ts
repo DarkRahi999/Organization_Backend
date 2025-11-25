@@ -1,6 +1,6 @@
 import mikroOrmConfig from "./mikro-orm.config";
-import { User } from "../auth/entites/user.entity";
-import { UserRole, UserStatus } from "../utils/enums";
+import { User } from "../auth/entities/user.entity";
+import { UserRole, UserStatus } from "../utils/enum";
 import * as bcrypt from "bcrypt";
 import * as dotenv from "dotenv";
 import { MikroORM } from "@mikro-orm/postgresql";
@@ -55,9 +55,9 @@ export async function runSeeding(refresh = true) {
       adminUser = em.create(User, {
         firstName: "Super",
         lastName: "Admin",
-        phone: "+8801729249260",
+        phone: "+8801729249261",
         email: "superadmin@gmail.com",
-        passHash: hashedPassword,
+        passwordHash: hashedPassword,
         role: UserRole.SuperAdmin,
         status: UserStatus.Active,
         createdAt: new Date(),
@@ -78,9 +78,9 @@ export async function runSeeding(refresh = true) {
       regularUser = em.create(User, {
         firstName: "Test",
         lastName: "User",
-        phone: "+1234567891",
+        phone: "+1234567892",
         email: "user@example.com",
-        passHash: hashedPassword,
+        passwordHash: hashedPassword,
         role: UserRole.Student,
         status: UserStatus.Active,
         createdAt: new Date(),
