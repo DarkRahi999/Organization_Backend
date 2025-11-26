@@ -55,7 +55,7 @@ export async function runSeeding(refresh = true) {
       adminUser = em.create(User, {
         firstName: "Super",
         lastName: "Admin",
-        phone: "+8801729249261",
+        phone: "+8801729249260",
         email: "superadmin@gmail.com",
         passwordHash: hashedPassword,
         role: UserRole.SuperAdmin,

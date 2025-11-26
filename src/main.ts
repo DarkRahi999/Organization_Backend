@@ -1,8 +1,8 @@
 import * as dotenv from "dotenv";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { Logger, ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import { Logger } from "@nestjs/common";
 import cookieParser from "cookie-parser";
 
 // Load environment variables
@@ -27,6 +27,18 @@ async function bootstrap() {
     app.setGlobalPrefix("api");
 
     // Global validation pipe with enhanced error messages
+    app.useGlobalPipes(
+      new ValidationPipe({
+        whitelist: true,
+        forbidNonWhitelisted: true,
+        transform: true,
+        disableErrorMessages: false,
+        validationError: {
+          target: false,
+          value: false,
+        },
+      })
+    );
 
     // Swagger configuration
     const config = new DocumentBuilder()
